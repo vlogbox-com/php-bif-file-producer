@@ -1,0 +1,23 @@
+{
+    "name": "vlogbox-com/php-bif-file-producer",
+    "description": "Package for creating Base Index Frame files (https://sdkdocs.roku.com/display/sdkdoc/Trick+Mode+Support) from Roku",
+    "keywords": ["roku", "php", "bif", "base index frame"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "VlogBox Dev Team",
+            "email": "development@vlogbox.com"
+        }
+    ],
+    "require": {
+		"php": ">=7.1"
+    },
+    "require-dev": {
+		"phpunit/phpunit": "6.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "BifFileProducer\\": "src/"
+        }
+    }
+}
