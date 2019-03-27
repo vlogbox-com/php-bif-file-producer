@@ -8,7 +8,7 @@ use BifFileProducer\Factory\BifFileFactory;
 use BifFileProducer\FrameProvider\FFmpegFrameProvider;
 use BifFileProducer\FrameProvider\FrameProviderInterface;
 use BifFileProducer\FrameProvider\FrameResizer\FFmpegResizer;
-use BifGenerator\FrameProvider\ScalableFrameProvider;
+use BifFileProducer\FrameProvider\ScalableFrameProvider;
 
 class Builder
 {

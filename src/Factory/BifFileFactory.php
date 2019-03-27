@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BifFileProducer\Factory;
 
-use BifGenerator\FrameProvider\FrameCollection;
+use BifFileProducer\FrameProvider\FrameCollection;
 
 /**
  * Class BifFileFactory

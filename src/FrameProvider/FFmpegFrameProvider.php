@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace BifFileProducer\FrameProvider;
 
-use BifGenerator\FrameProvider\FrameCollection;
-
 class FFmpegFrameProvider implements FrameProviderInterface
 {
     /**

@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace BifGenerator\FrameProvider;
+namespace BifFileProducer\FrameProvider;
 
-use BifFileProducer\FrameProvider\FrameProviderInterface;
 use BifFileProducer\FrameProvider\FrameResizer\FrameResizerInterface;
 
 class ScalableFrameProvider implements FrameProviderInterface
