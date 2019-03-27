@@ -137,7 +137,7 @@ class Builder
         $tmpDir = null;
         $frameProvider = $this->frameProvider;
         if (!$frameProvider) {
-            $tmpDir = $this->tempDir . DIRECTORY_SEPARATOR . md5(microtime(true));
+            $tmpDir = $this->tempDir . DIRECTORY_SEPARATOR . md5((string)microtime(true));
 
             if (
                 !mkdir($tmpDir)
