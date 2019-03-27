@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BifGenerator\Factory;
+namespace BifFileProducer\Factory;
 
 use BifGenerator\FrameProvider\FrameCollection;
 
