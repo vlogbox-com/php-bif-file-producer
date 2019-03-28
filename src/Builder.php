@@ -49,6 +49,7 @@ class Builder
         $this->bifFactory = new BifFileFactory();
         $this->typesToProduce = self::VALID_TYPES;
         $this->tempDir = sys_get_temp_dir();
+        $this->outputDir = sys_get_temp_dir();
     }
 
     public function setFrameProvider(FrameProviderInterface $frameProvider): self
@@ -167,7 +168,7 @@ class Builder
                 ->bifFactory
                 ->create(
                     $frameProvider->getFrames($videoFilePath),
-                    $this->outputDir . DIRECTORY_SEPARATOR . $type . '.bif'
+                    $this->outputDir . DIRECTORY_SEPARATOR . md5($videoFilePath . $type) . '.bif'
                 );
         }
 
