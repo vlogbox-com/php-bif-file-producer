@@ -83,13 +83,17 @@ class ScalableFrameProvider implements FrameProviderInterface
     protected function rescaleCollection(FrameCollection $frameCollection, int $width): FrameCollection
     {
         $newFrames = [];
+        $directory = $this->outputDir . DIRECTORY_SEPARATOR . $width;
         $this->frameResizer->setOutputDirectory(
-            $this->outputDir . DIRECTORY_SEPARATOR . $width
+            $directory
         );
         foreach ($frameCollection->getFrames() as $frame) {
             $fileNameParts = explode(DIRECTORY_SEPARATOR, $frame);
             $fileName = array_pop($fileNameParts);
-            $newFrames[] = $this->frameResizer->resize($frame, $width, $fileName);
+            if($this->frameResizer->resize($frame, $width, $fileName)) {
+                $newFrames[] = $directory . DIRECTORY_SEPARATOR . $fileName;
+            }
+
         }
 
         return new FrameCollection(
