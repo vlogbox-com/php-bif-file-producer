@@ -38,9 +38,10 @@ class FFmpegResizer implements FrameResizerInterface
         $outputFileName = $this->outputDir . DIRECTORY_SEPARATOR . $outputName;
         $command =
             $this->binary
-            . ' -i ' . $origin
-            . ' -vf scale=' . $width . ':-1'
-            . ' ' . $outputFileName;
+                . ' -y'
+                . ' -i ' . $origin
+                . ' -vf scale=' . $width . ':-1'
+                . ' ' . $outputFileName;
         exec($command);
 
         return file_exists($outputFileName);

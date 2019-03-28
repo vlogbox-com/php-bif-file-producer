@@ -107,7 +107,6 @@ class ScalableFrameProvider implements FrameProviderInterface
     public function setFrameWidth(int $width): void
     {
         $this->width = $width;
-        $this->cachedCollections = [];
     }
 
     public function setOutputDirectory(string $directoryPath): void
