@@ -55,7 +55,7 @@ class ScalableFrameProvider implements FrameProviderInterface
     ): FrameCollection
     {
 
-        if (!$this->cachedCollections[$videoFilePath]) {
+        if (!array_key_exists($videoFilePath, $this->cachedCollections)) {
 
             $this->cachedCollections[$videoFilePath] = [];
 
@@ -66,7 +66,7 @@ class ScalableFrameProvider implements FrameProviderInterface
         }
 
         if (
-            $this->cachedCollections[$videoFilePath][$this->width]
+            array_key_exists($this->width, $this->cachedCollections[$videoFilePath])
         ) {
             return $this->cachedCollections[$videoFilePath][$this->width];
         }
