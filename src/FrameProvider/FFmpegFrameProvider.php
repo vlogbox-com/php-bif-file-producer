@@ -43,11 +43,12 @@ class FFmpegFrameProvider implements FrameProviderInterface
         $exitCode = null;
         $output = null;
         exec($this->binary . ' -version', $output, $exitCode);
+        $output = implode('.', $output);
         if (
             $exitCode !== 0
             || !preg_match('/ffmpeg version [\d\.\-]+/im', $output)
         ) {
-            throw new \RuntimeException('ffmpeg not found. Error output: ' .$output);
+            throw new \RuntimeException('ffmpeg not found. Error output: ' . $output);
         }
     }
 
@@ -69,7 +70,7 @@ class FFmpegFrameProvider implements FrameProviderInterface
         exec($command, $output, $exitCode);
 
         if ($exitCode) {
-            throw new \RuntimeException('Something went wrong: ' . $output);
+            throw new \RuntimeException('Something went wrong: ' . implode('.', $output));
         }
 
         $files = \scandir($this->outputDir, SCANDIR_SORT_ASCENDING);
