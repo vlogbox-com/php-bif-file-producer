@@ -35,11 +35,16 @@ class FFmpegFrameProvider implements FrameProviderInterface
             $this->binary = $binaryPath;
         }
 
+        $this->checkFFmpegAvailability();
+    }
+
+    protected function checkFFmpegAvailability(): void
+    {
         $errorOutput = null;
         $output = system($this->binary . ' -version', $errorOutput);
         if (
             $errorOutput
-            || !preg_match('/ffmpeg version [\d\.\-]+/', $output)
+            || !preg_match('/ffmpeg version [\d\.\-]+/im', $output)
         ) {
             throw new \RuntimeException('ffmpeg not found');
         }
