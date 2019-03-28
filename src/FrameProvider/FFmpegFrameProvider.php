@@ -40,13 +40,14 @@ class FFmpegFrameProvider implements FrameProviderInterface
 
     protected function checkFFmpegAvailability(): void
     {
-        $errorOutput = null;
-        $output = system($this->binary . ' -version', $errorOutput);
+        $exitCode = null;
+        $output = null;
+        exec($this->binary . ' -version', $output, $exitCode);
         if (
-            $errorOutput
+            $exitCode !== 0
             || !preg_match('/ffmpeg version [\d\.\-]+/im', $output)
         ) {
-            throw new \RuntimeException('ffmpeg not found');
+            throw new \RuntimeException('ffmpeg not found. Error output: ' .$output);
         }
     }
 
@@ -63,10 +64,12 @@ class FFmpegFrameProvider implements FrameProviderInterface
             . ' -vf scale=' . $this->width . ':-1'
             . ' ' . $this->outputDir . DIRECTORY_SEPARATOR . '%08d.jpg';
 
-        system($command, $errorOutput);
+        $exitCode = null;
+        $output = null;
+        exec($command, $output, $exitCode);
 
-        if ($errorOutput) {
-            throw new \RuntimeException('Something went wrong: ' . $errorOutput);
+        if ($exitCode) {
+            throw new \RuntimeException('Something went wrong: ' . $output);
         }
 
         $files = \scandir($this->outputDir, SCANDIR_SORT_ASCENDING);
