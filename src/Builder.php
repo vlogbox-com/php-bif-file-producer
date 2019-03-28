@@ -173,10 +173,27 @@ class Builder
         }
 
         if($dropTmpDir && $tmpDir) {
-            rmdir($tmpDir);
+            $this->rrmdir($tmpDir);
         }
 
         return $result;
+    }
+
+    protected function rrmdir($dir) {
+        if (is_dir($dir)) {
+            $objects = scandir($dir, SCANDIR_SORT_ASCENDING);
+            foreach ($objects as $object) {
+                if ($object !== '.' && $object !== '..') {
+                    if (filetype($dir.DIRECTORY_SEPARATOR.$object) === 'dir') {
+                        $this->rrmdir($dir.DIRECTORY_SEPARATOR.$object);
+                    } else {
+                        unlink($dir.DIRECTORY_SEPARATOR.$object);
+                    }
+                }
+            }
+            reset($objects);
+            rmdir($dir);
+        }
     }
 
 
