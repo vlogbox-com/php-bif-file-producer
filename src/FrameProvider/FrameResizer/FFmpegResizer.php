@@ -49,8 +49,13 @@ class FFmpegResizer implements FrameResizerInterface
     public function setOutputDirectory(string $directoryPath): void
     {
         $this->outputDir = $directoryPath;
+        /**
+         * Note: https://github.com/kalessil/phpinspectionsea/blob/master/docs/probable-bugs.md#mkdir-race-condition
+         */
+        /** @noinspection NotOptimalIfConditionsInspection */
         if (
-            !mkdir($this->outputDir)
+            !is_dir($this->outputDir)
+            && !mkdir($this->outputDir, 0777, true)
             && !is_dir($this->outputDir)
         ) {
             throw new \BadMethodCallException('Output folder not exists and could not be created: ' . $directoryPath);

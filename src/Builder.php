@@ -92,8 +92,13 @@ class Builder
     public function setOutputDirectory(string $directoryPath): self
     {
         $this->outputDir = rtrim($directoryPath, DIRECTORY_SEPARATOR);
+        /**
+         * Note: https://github.com/kalessil/phpinspectionsea/blob/master/docs/probable-bugs.md#mkdir-race-condition
+         */
+        /** @noinspection NotOptimalIfConditionsInspection */
         if (
-            !mkdir($this->outputDir)
+            !is_dir($this->outputDir)
+            && !mkdir($this->outputDir, 0777, true)
             && !is_dir($this->outputDir)
         ) {
             throw new \BadMethodCallException('Output folder not exists and could not be created: ' . $directoryPath);
@@ -105,8 +110,13 @@ class Builder
     public function setTempDirectory(string $directoryPath): self
     {
         $this->tempDir = rtrim($directoryPath, DIRECTORY_SEPARATOR);
+        /**
+         * Note: https://github.com/kalessil/phpinspectionsea/blob/master/docs/probable-bugs.md#mkdir-race-condition
+         */
+        /** @noinspection NotOptimalIfConditionsInspection */
         if (
-            !mkdir($this->tempDir)
+            !is_dir($this->tempDir)
+            && !mkdir($this->tempDir, 0777, true)
             && !is_dir($this->tempDir)
         ) {
             throw new \BadMethodCallException('Output folder not exists and could not be created: ' . $directoryPath);
