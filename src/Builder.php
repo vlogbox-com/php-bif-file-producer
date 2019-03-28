@@ -164,12 +164,14 @@ class Builder
 
         foreach ($this->typesToProduce as $type) {
             $frameProvider->setFrameWidth($type);
-            $result[$type] = $this
+            $outputFile = $this->outputDir . DIRECTORY_SEPARATOR . md5($videoFilePath . $type) . '.bif';
+            $this
                 ->bifFactory
                 ->create(
                     $frameProvider->getFrames($videoFilePath),
-                    $this->outputDir . DIRECTORY_SEPARATOR . md5($videoFilePath . $type) . '.bif'
+                    $outputFile
                 );
+            $result[$type] = $outputFile;
         }
 
         if($dropTmpDir && $tmpDir) {
