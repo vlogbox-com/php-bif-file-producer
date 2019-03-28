@@ -92,7 +92,7 @@ class FFmpegFrameProvider implements FrameProviderInterface
             array_map(
                 function(string $fileName): string
                 {
-                    return $this->outputDir . $fileName;
+                    return $this->outputDir . DIRECTORY_SEPARATOR . $fileName;
                 },
                 $files
             ),
@@ -116,7 +116,7 @@ class FFmpegFrameProvider implements FrameProviderInterface
 
     public function setOutputDirectory(string $directoryPath): void
     {
-        $this->outputDir = $directoryPath;
+        $this->outputDir = rtrim($directoryPath, DIRECTORY_SEPARATOR);
         /**
          * Note: https://github.com/kalessil/phpinspectionsea/blob/master/docs/probable-bugs.md#mkdir-race-condition
          */
